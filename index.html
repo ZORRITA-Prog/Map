@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Tracker - Teyvat Maps</title>
+    <style>
+        :root {
+            --gold: #ecc94b;
+            --dark-bg: #111827;
+            --panel-bg: #1f2937;
+            --btn-idle: #374151;
+            --btn-active: #3b82f6;
+            --text: #f3f4f6;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .layout {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background: var(--panel-bg);
+            padding: 12px;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Selector Lateral */
+        .sidebar {
+            width: 320px;
+            background: var(--panel-bg);
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 1px solid #374151;
+            z-index: 10;
+        }
+
+        .category {
+            margin-bottom: 25px;
+        }
+
+        .category h3 {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 5px;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px;
+            margin: 6px 0;
+            background: var(--btn-idle);
+            border: 1px solid transparent;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option-btn:hover {
+            background: #4b5563;
+        }
+
+        .option-btn.active {
+            background: var(--btn-active);
+            border-color: white;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+
+        .icon { margin-right: 10px; font-size: 1.2rem; }
+
+        /* Mapa */
+        .map-frame {
+            flex: 1;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Responsivo Móvil */
+        @media (max-width: 768px) {
+            .main-content { flex-direction: column; }
+            .sidebar { 
+                width: 100%; 
+                height: 40%; 
+                border-right: none; 
+                border-bottom: 1px solid #374151;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout">
+    <header>✨ GENSHIN HELPER: MINERÍA Y RECURSOS</header>
+    
+    <div class="main-content">
+        <aside class="sidebar">
+            <div class="category">
+                <h3>⛏️ Minerales Importantes</h3>
+                <button class="option-btn" onclick="seleccionar(this, 'Pedazo de Cristal')">
+                    <span class="icon">💎</span> Cristal Azul
+                </button>
+                <button class="option-btn" onclick="seleccionar(this, 'Cor Lapis')">
+                    <span class="icon">🔶</span> Cor Lapis
+                </button>
+                <button class="option-btn" onclick="seleccionar(this, 'Hierro Blanco')">
+                    <span class="icon">🌑</span> Hierro Blanco
+                </button>
+            </div>
+
+            <div class="category">
+                <h3>🌸 Especialidades</h3>
+                <button class="option-btn" onclick="seleccionar(this, 'Especialidades Mondstadt')">
+                    <span class="icon">🍃</span> Mondstadt
+                </button>
+                <button class="option-btn" onclick="seleccionar(this, 'Especialidades Liyue')">
+                    <span class="icon">🐲</span> Liyue
+                </button>
+            </div>
+
+            <div class="category">
+                <h3>🧹 Limpiar Vista</h3>
+                <button class="option-btn" style="background: #991b1b;" onclick="limpiar(this)">
+                    <span class="icon">🗑️</span> DESACTIVAR TODO
+                </button>
+            </div>
+
+            <div style="background: #111827; padding: 10px; border-radius: 8px; font-size: 0.8rem; color: #9ca3af;">
+                <strong>Instrucciones:</strong><br>
+                1. Toca un recurso arriba.<br>
+                2. En el mapa, pulsa el icono de <b>Filtro (menú)</b> a la izquierda y elige lo mismo.<br>
+                3. ¡A farmear!
+            </div>
+        </aside>
+
+        <main class="map-frame">
+            <iframe id="mapa" src="https://genshin-impact-map.appsample.com/"></iframe>
+        </main>
+    </div>
+</div>
+
+<script>
+    function seleccionar(btn, tipo) {
+        // Quitar clase activa de todos
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+        // Poner activa al seleccionado
+        btn.classList.add('active');
+        console.log("Filtrando para: " + tipo);
+    }
+
+    function limpiar(btn) {
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+        alert("Limpieza: Abre el menú del mapa y pulsa 'Hide All' para borrar el revoltijo.");
+    }
+</script>
+
+</body>
+</html>
