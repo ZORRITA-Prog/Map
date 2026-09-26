@@ -18,4 +18,4 @@ Creadores
 
 1. **Clonar el repositorio:**
    ```bash
-   https://rezemd56-hash.github.io/Map-V4/
+  https://zorrita-prog.github.io/Map/
